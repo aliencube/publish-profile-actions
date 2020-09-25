@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh -l
 
 set -e
 
@@ -7,7 +7,14 @@ set -e
 # $2: Resource Group Name
 # $3: Web/Function App Instance Name
 
-ifa=$("$1" | tr '[:upper:]' '[:lower:]')
+clientId=$(echo $AZURE_CREDENTIALS | jq -r '.clientId')
+clientSecret=$(echo $AZURE_CREDENTIALS | jq -r '.clientSecret')
+subscriptionId=$(echo $AZURE_CREDENTIALS | jq -r '.subscriptionId')
+tenantId=$(echo $AZURE_CREDENTIALS | jq -r '.tenantId')
+
+az login --service-principal -u $clientId -p $clientSecret --tenant $tenantId
+
+ifa=$(echo "$1" | tr '[:upper:]' '[:lower:]')
 
 if [ "$ifa" -eq "true" ]
 then
@@ -16,6 +23,7 @@ else
     profile=$(az webapp deployment list-publishing-profiles -g $2 -n $3 --xml)
 fi
 
-echo "Profile: $profile"
+profile=$(echo $profile | sed -e 's|\"<|<|g' | sed -e 's|>\"|>|g' | sed -e 's|\\"|"|g' | sed -e 's|\\\\|\\|g')
 
+echo "Profile: $profile"
 echo "::set-output name=profile::'$profile'"

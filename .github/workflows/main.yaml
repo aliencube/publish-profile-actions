@@ -20,6 +20,8 @@ jobs:
     - name: Get WebApp publish profile
       id: webapp
       uses: ./
+      env:
+        AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
       with:
         resourceGroupName: ${{ secrets.RESOURCE_GROUP_NAME }}
         appName: ${{ secrets.WEBAPP_NAME }}
@@ -28,6 +30,8 @@ jobs:
     - name: Get FunctionApp publish profile
       id: fncapp
       uses: ./
+      env:
+        AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
       with:
         resourceGroupName: ${{ secrets.RESOURCE_GROUP_NAME }}
         appName: ${{ secrets.FUNCTIONAPP_NAME }}

@@ -9,6 +9,11 @@ LABEL "repository"="http://github.com/aliencube/publish-profile-actions"
 LABEL "homepage"="http://github.com/aliencube"
 LABEL "maintainer"="Justin Yoo <no-reply@aliencube.com>"
 
+# Install jq
+RUN apk update && apk add \
+    jq \
+ && rm -rf /var/cache/apk/*
+
 ADD entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
