@@ -1,0 +1,31 @@
+name: Azure App Service Publish Profile
+author: Aliencube Community
+description: Retrieve the publish profile of Azure Web App or Functions App in XML format
+
+branding:
+  icon: clipboard
+  color: purple
+
+inputs:
+  resourceGroupName:
+    description: Resource group name.
+    required: true
+  appName:
+    description: App instance name.
+    required: true
+  isFunctionApp:
+    description: Value indicating whether it is the Azure Functions app or not. If omitted, its default value is set to `false`.
+    required: false
+    default: 'false'
+
+outputs:
+  profile:
+    description: Publish profile in XML.
+
+runs:
+  using: docker
+  image: Dockerfile
+  args:
+  - ${{ inputs.isFunctionApp }}
+  - ${{ inputs.resourceGroupName }}
+  - ${{ inputs.appName }}
