@@ -12,7 +12,7 @@ clientSecret=$(echo $AZURE_CREDENTIALS | jq -r '.clientSecret')
 subscriptionId=$(echo $AZURE_CREDENTIALS | jq -r '.subscriptionId')
 tenantId=$(echo $AZURE_CREDENTIALS | jq -r '.tenantId')
 
-az login --service-principal -u $clientId -p $clientSecret --tenant $tenantId
+login=$(az login --service-principal -u $clientId -p $clientSecret --tenant $tenantId)
 
 ifa=$(echo "$1" | tr '[:upper:]' '[:lower:]')
 
@@ -25,5 +25,4 @@ fi
 
 profile=$(echo $profile | sed -e 's|\"<|<|g' | sed -e 's|>\"|>|g' | sed -e 's|\\"|"|g' | sed -e 's|\\\\|\\|g')
 
-echo "Profile: $profile"
 echo "::set-output name=profile::'$profile'"

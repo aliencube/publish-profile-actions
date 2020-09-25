@@ -12,11 +12,6 @@ jobs:
     - name: Checkout the repo
       uses: actions/checkout@v2
 
-    - name: Login to Azure
-      uses: Azure/login@v1.1
-      with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
-
     - name: Get WebApp publish profile
       id: webapp
       uses: ./
