@@ -37,4 +37,3 @@ jobs:
       run: |
         echo "WebApp: ${{ steps.webapp.outputs.profile }}"
         echo "FunctionApp: ${{ steps.fncapp.outputs.profile }}"
-
