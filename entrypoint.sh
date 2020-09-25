@@ -18,11 +18,9 @@ ifa=$(echo "$1" | tr '[:upper:]' '[:lower:]')
 
 if [ "$ifa" -eq "true" ]
 then
-    profile=$(az functionapp deployment list-publishing-profiles -g $2 -n $3 --xml)
+    profile=$(az functionapp deployment list-publishing-profiles -g $2 -n $3 --xml --output tsv)
 else
-    profile=$(az webapp deployment list-publishing-profiles -g $2 -n $3 --xml)
+    profile=$(az webapp deployment list-publishing-profiles -g $2 -n $3 --xml --output tsv)
 fi
-
-profile=$(echo $profile | sed -e 's|\"<|<|g' | sed -e 's|>\"|>|g' | sed -e 's|\\"|"|g' | sed -e 's|\\\\|\\|g')
 
 echo "::set-output name=profile::'$profile'"
