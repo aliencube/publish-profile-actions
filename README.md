@@ -8,7 +8,6 @@ This is a GitHub Actions that retrieves the publish profile of Azure Web App or 
 * `AZURE_CREDENTIALS` (**Required**): Environment variable. Azure credentials for a service principal.
 * `resourceGroupName` (**Required**): Resource group name.
 * `appName` (**Required**): App instance name.
-* `isFunctionApp`: Value indicating whether it is the Azure Functions app or not. If omitted, its default value is set to `false`.
 
 
 ## Outputs ##
@@ -50,7 +49,6 @@ steps:
   with:
     resourceGroupName: '<RESOURCE_GROUP_NAME>'
     appName: '<FUNCTIONAPP_NAME>'
-    isFunctionApp: true
 
 - name: Show Profile
   shell: bash

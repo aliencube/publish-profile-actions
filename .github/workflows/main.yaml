@@ -20,7 +20,6 @@ jobs:
       with:
         resourceGroupName: ${{ secrets.RESOURCE_GROUP_NAME }}
         appName: ${{ secrets.WEBAPP_NAME }}
-        # isFunctionApp: false
 
     - name: Get FunctionApp publish profile
       id: fncapp
@@ -30,7 +29,6 @@ jobs:
       with:
         resourceGroupName: ${{ secrets.RESOURCE_GROUP_NAME }}
         appName: ${{ secrets.FUNCTIONAPP_NAME }}
-        # isFunctionApp: true
 
     - name: Show Profile
       shell: bash
