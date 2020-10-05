@@ -20,6 +20,8 @@ $profile = Get-AzWebAppPublishingProfile `
     -ResourceGroupName $ResourceGroupName `
     -Name $AppName
 
+$profile = $profile.Replace("`r", "").Replace("`n", "")
+
 Write-Output "::set-output name=profile::'$profile'"
 
 Remove-Variable profile
