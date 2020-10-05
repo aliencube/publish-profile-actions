@@ -22,7 +22,7 @@ $profile = Get-AzWebAppPublishingProfile `
 
 $profile = $profile.Replace("`r", "").Replace("`n", "")
 
-Write-Output "::set-output name=profile::'$profile'"
+Write-Output "::set-output name=profile::$profile"
 
 Remove-Variable profile
 Remove-Variable connected
