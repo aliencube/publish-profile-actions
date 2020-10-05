@@ -27,7 +27,7 @@ runs:
   image: Dockerfile
   args:
   # - ${{ inputs.isFunctionApp }}
-  - ResourceGroupName
+  - -ResourceGroupName
   - ${{ inputs.resourceGroupName }}
-  - AppName
+  - -AppName
   - ${{ inputs.appName }}
