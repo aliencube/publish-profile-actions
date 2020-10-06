@@ -27,17 +27,22 @@ jobs:
         resourceGroupName: ${{ secrets.RESOURCE_GROUP_NAME }}
         appName: ${{ secrets.WEBAPP_NAME }}
 
-    - name: Get FunctionApp publish profile
-      id: fncapp
+    - name: Show WebApp Profile
+      shell: bash
+      run: |
+        echo "WebApp: ${{ steps.webapp.outputs.profile }}"
+
+    - name: Reset WebApp publish profile
+      id: reset
       uses: ./
       env:
         AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
       with:
         resourceGroupName: ${{ secrets.RESOURCE_GROUP_NAME }}
-        appName: ${{ secrets.FUNCTIONAPP_NAME }}
+        appName: ${{ secrets.WEBAPP_NAME }}
+        reset: true
 
-    - name: Show Profile
+    - name: Show Reset Profile
       shell: bash
       run: |
-        echo "WebApp: ${{ steps.webapp.outputs.profile }}"
-        echo "FunctionApp: ${{ steps.fncapp.outputs.profile }}"
+        echo "WebApp: ${{ steps.reset.outputs.profile }}"

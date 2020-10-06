@@ -1,6 +1,6 @@
 # Azure Web/Functions App Publish Profile Actions #
 
-This is a GitHub Actions that retrieves the publish profile of Azure Web App or Functions App in XML format.
+This is a GitHub Actions that retrieves or resets the publish profile of Azure Web App or Functions App in XML format.
 
 
 ## Inputs ##
@@ -8,20 +8,23 @@ This is a GitHub Actions that retrieves the publish profile of Azure Web App or 
 * `AZURE_CREDENTIALS` (**Required**): Environment variable. Azure credentials for a service principal.
 * `resourceGroupName` (**Required**): Resource group name.
 * `appName` (**Required**): App instance name.
+* `reset`: Value indicating whether to reset the publish profile or not. If omitted, it's defaulted to `false`.
 
 
 ## Outputs ##
 
-* `profile`: Publish profile in XML.
+* `profile`: Publish profile in XML. **NOTE**: If the `reset` parameter is set to `true`, the output value will be empty.
 
 
 ## Example Usages ##
 
-### Azure Web App Publish Profile ###
+**STRONGLY RECOMMENDED**: If you echo the publish profile in your GitHub Actions workflow, the `userPWD` value cannot be masked. Therefore, it's STRONGLY RECOMMENDED to reset the publish profile to minimise the chance being compromised.
+
+### Retrieve Azure Web/Function App Publish Profile ###
 
 ```yaml
 steps:
-- name: Get WebApp publish profile
+- name: Get WebApp/FunctionApp publish profile
   id: webapp
   uses: aliencube/publish-profile-actions@v1
   env:
@@ -37,23 +40,24 @@ steps:
 ```
 
 
-### Azure Functions App Publish Profile ###
+### Reset Azure Web/Function App Publish Profile ###
 
 ```yaml
 steps:
-- name: Get FunctionApp publish profile
-  id: fncapp
+- name: Reset WebApp/FunctionApp publish profile
+  id: reset
   uses: aliencube/publish-profile-actions@v1
   env:
     AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
   with:
     resourceGroupName: '<RESOURCE_GROUP_NAME>'
     appName: '<FUNCTIONAPP_NAME>'
+    reset: true
 
-- name: Show Profile
+- name: Show Profile - this should show empty
   shell: bash
   run: |
-    echo "FunctionApp: ${{ steps.fncapp.outputs.profile }}"
+    echo "FunctionApp: ${{ steps.reset.outputs.profile }}"
 ```
 
 

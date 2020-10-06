@@ -5,7 +5,11 @@ Param(
 
     [string]
     [Parameter(Mandatory=$true)]
-    $AppName
+    $AppName,
+
+    [string]
+    [Parameter(Mandatory=$false)]
+    $Reset = "false"
 )
 
 $clientId = ($env:AZURE_CREDENTIALS | ConvertFrom-Json).clientId
@@ -16,11 +20,21 @@ $credentials = New-Object System.Management.Automation.PSCredential($clientId, $
 
 $connected = Connect-AzAccount -ServicePrincipal -Credential $credentials -Tenant $tenantId
 
-$profile = Get-AzWebAppPublishingProfile `
-    -ResourceGroupName $ResourceGroupName `
-    -Name $AppName
+$profile = ""
 
-$profile = $profile.Replace("`r", "").Replace("`n", "")
+if ([System.Convert]::ToBoolean($Reset) -eq $true) {
+    $profile = Reset-AzWebAppPublishingProfile `
+        -ResourceGroupName $ResourceGroupName `
+        -Name $AppName
+
+    $profile = ""
+} else {
+    $profile = Get-AzWebAppPublishingProfile `
+        -ResourceGroupName $ResourceGroupName `
+        -Name $AppName
+
+    $profile = $profile.Replace("`r", "").Replace("`n", "")
+}
 
 Write-Output "::set-output name=profile::$profile"
 
