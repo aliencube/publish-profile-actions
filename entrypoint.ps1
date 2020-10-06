@@ -7,9 +7,9 @@ Param(
     [Parameter(Mandatory=$true)]
     $AppName,
 
-    [string]
+    [bool]
     [Parameter(Mandatory=$false)]
-    $Reset = "false"
+    $Reset = $false
 )
 
 $clientId = ($env:AZURE_CREDENTIALS | ConvertFrom-Json).clientId
@@ -22,7 +22,7 @@ $connected = Connect-AzAccount -ServicePrincipal -Credential $credentials -Tenan
 
 $profile = ""
 
-if ([System.Convert]::ToBoolean($Reset) -eq $true) {
+if ($Reset -eq $true) {
     $profile = Reset-AzWebAppPublishingProfile `
         -ResourceGroupName $ResourceGroupName `
         -Name $AppName
