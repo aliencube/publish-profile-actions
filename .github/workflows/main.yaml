@@ -39,7 +39,7 @@ jobs:
         AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
       with:
         resourceGroupName: ${{ secrets.RESOURCE_GROUP_NAME }}
-        appName: ${{ secrets.FUNCTIONAPP_NAME }}
+        appName: ${{ secrets.WEBAPP_NAME }}
         reset: true
 
     - name: Show Reset Profile
