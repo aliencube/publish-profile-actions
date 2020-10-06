@@ -27,8 +27,7 @@ if ([System.Convert]::ToBoolean($Reset) -eq $true) {
         -ResourceGroupName $ResourceGroupName `
         -Name $AppName
 
-    # $profile = ""
-    $profile = $profile.Replace("`r", "").Replace("`n", "")
+    $profile = ""
 } else {
     $profile = Get-AzWebAppPublishingProfile `
         -ResourceGroupName $ResourceGroupName `
