@@ -15,10 +15,11 @@ Param(
 $clientId = ($env:AZURE_CREDENTIALS | ConvertFrom-Json).clientId
 $clientSecret = ($env:AZURE_CREDENTIALS | ConvertFrom-Json).clientSecret | ConvertTo-SecureString -AsPlainText -Force
 $tenantId = ($env:AZURE_CREDENTIALS | ConvertFrom-Json).tenantId
+$subscriptionId = ($env:AZURE_CREDENTIALS | ConvertFrom-Json).subscriptionId
 
 $credentials = New-Object System.Management.Automation.PSCredential($clientId, $clientSecret)
 
-$connected = Connect-AzAccount -ServicePrincipal -Credential $credentials -Tenant $tenantId
+$connected = Connect-AzAccount -ServicePrincipal -Credential $credentials -Tenant $tenantId -SubscriptionId $subscriptionId
 
 $profile = ""
 
