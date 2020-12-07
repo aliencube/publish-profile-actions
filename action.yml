@@ -1,5 +1,5 @@
-name: Azure App Service Publish Profile
-author: Aliencube Community
+name: Azure AppService PublishProfile
+author: Aliencube Community (ediit by McNultyyy)
 description: Retrieve or reset the publish profile of Azure Web App or Functions App in XML format
 
 branding:
