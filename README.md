@@ -9,6 +9,7 @@ This is a GitHub Actions that retrieves or resets the publish profile of Azure W
 * `resourceGroupName` (**Required**): Resource group name.
 * `appName` (**Required**): App instance name.
 * `reset`: Value indicating whether to reset the publish profile or not. If omitted, it's defaulted to `false`.
+* `subscriptionId`: Azure Subscription Id for the App instance. If omitted, it's defaulted to `''`.
 
 
 ## Outputs ##
