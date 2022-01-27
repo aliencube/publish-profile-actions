@@ -13,7 +13,7 @@ Param(
 
     [string]
     [Parameter(Mandatory=$false)]
-    $SubscriptionId
+    $SubscriptionId = ""
 )
 
 $clientId = ($env:AZURE_CREDENTIALS | ConvertFrom-Json).clientId
