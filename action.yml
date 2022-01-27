@@ -17,6 +17,10 @@ inputs:
     description: Value indicating whether to reset the publish profile or not.
     required: false
     default: 'false'
+  subscriptionId:
+    description: Optionally provide the Azure Subscription Id to select the appropriate Azure Subscription where the App instance resides.
+    required: false
+    default: ''
 
 outputs:
   profile:
@@ -32,3 +36,5 @@ runs:
   - ${{ inputs.appName }}
   - -Reset
   - ${{ inputs.reset }}
+  - -SubscriptionId
+  - ${{ inputs.subscriptionId }}
